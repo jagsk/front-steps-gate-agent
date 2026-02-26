@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:auth.frontsteps.com)",
+      "Read(//c/Projects/**)",
+      "WebFetch(domain:app.frontsteps.com)",
+      "WebFetch(domain:frontsteps.com)",
+      "WebFetch(domain:api.frontsteps.com)",
+      "WebFetch(domain:blackhawk-hoa.frontsteps.com)",
+      "Bash(dir:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next build:*)",
+      "Bash(node:*)",
+      "Bash(npx cap init:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(ipconfig:*)",
+      "Bash(findstr:*)",
+      "Bash(NEXT_TURBOPACK=0 NEXT_OUTPUT=export npx next build:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx cap sync:*)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.aifreeapi.com)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
