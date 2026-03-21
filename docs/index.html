@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackhawk Gate Agent - Setup Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+
+    .hero-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 20px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+    }
+
+    .hero-icon svg {
+      width: 44px;
+      height: 44px;
+      color: white;
+    }
+
+    .hero h1 {
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      font-size: 16px;
+    }
+
+    /* Card */
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h2 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+
+    /* Steps */
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .step-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .step-content code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .tip {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #92400e;
+      line-height: 1.5;
+    }
+
+    .tip strong {
+      color: #78350f;
+    }
+
+    /* Download button */
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(22, 163, 74, 0.45);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    .download-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Examples */
+    .examples {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .example {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.4;
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .example::before {
+      content: '"';
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      font-size: 24px;
+      color: #3b82f6;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* Settings preview */
+    .settings-preview {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .settings-field {
+      margin-bottom: 10px;
+    }
+
+    .settings-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .settings-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .settings-field .field-box {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px 0 16px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <h1>Blackhawk Gate Agent</h1>
+    <p>Manage visitor passes with natural language</p>
+  </div>
+
+  <!-- Download -->
+  <div class="card">
+    <h2>Step 1 &mdash; Download &amp; Install</h2>
+
+    <a class="download-btn" id="downloadBtn" href="https://github.com/jagsk/front-steps-gate-agent/releases/latest/download/blackhawk-gate.apk">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download APK
+    </a>
+
+    <div class="tip">
+      <strong>First time?</strong> Android will ask you to allow installs from your browser. Tap <strong>Settings &rarr; Allow</strong> when prompted, then tap the downloaded file to install.
+    </div>
+  </div>
+
+  <!-- Setup -->
+  <div class="card">
+    <h2>Step 2 &mdash; Enter Your Credentials</h2>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Open the app</h3>
+        <p>Look for <strong>Blackhawk Gate</strong> in your app drawer.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Tap the gear icon</h3>
+        <p>Top-right corner of the screen to open Settings.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Fill in your details</h3>
+        <p>Enter the credentials provided to you and tap <strong>Save</strong>.</p>
+      </div>
+    </div>
+
+    <div class="settings-preview">
+      <div class="settings-field">
+        <label>FrontSteps Username</label>
+        <div class="field-box">your-email@example.com</div>
+      </div>
+      <div class="settings-field">
+        <label>FrontSteps Password</label>
+        <div class="field-box">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+      </div>
+      <div class="settings-field">
+        <label>Claude API Key</label>
+        <div class="field-box">sk-ant-...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="card">
+    <h2>Step 3 &mdash; Start Using It</h2>
+
+    <div class="step" style="margin-bottom: 16px;">
+      <div class="step-content">
+        <p>Just type what you need in plain English. The agent will parse your request, show you a summary, and ask for confirmation before creating the pass.</p>
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example">Allow David Moore, contractor on Feb 20th</div>
+      <div class="example">Add guest John Smith tomorrow</div>
+      <div class="example">Let Amazon delivery in on Monday</div>
+      <div class="example">Add Erica, cleaner every Wed starting next week</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Questions? Reach out to your community admin.<br>
+    <a href="https://github.com/jagsk/front-steps-gate-agent">View on GitHub</a>
+  </div>
+
+</div>
+
+</body>
+</html>
