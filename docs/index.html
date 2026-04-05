@@ -246,6 +246,44 @@
       color: #93c5fd;
       text-decoration: none;
     }
+
+    /* Platform tabs */
+    .platform-tabs {
+      display: flex;
+      gap: 0;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 4px;
+      margin-bottom: 16px;
+    }
+
+    .platform-tabs button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+
+    .platform-tabs button.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    .platform-panel {
+      display: none;
+    }
+
+    .platform-panel.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -269,17 +307,40 @@
   <div class="card">
     <h2>Step 1 &mdash; Download &amp; Install</h2>
 
-    <a class="download-btn" id="downloadBtn" href="https://github.com/jagsk/front-steps-gate-agent/releases/latest/download/blackhawk-gate.apk">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      Download APK
-    </a>
+    <div class="platform-tabs" role="tablist">
+      <button type="button" class="active" data-panel="panel-android" role="tab">Android</button>
+      <button type="button" data-panel="panel-ios" role="tab">iOS</button>
+    </div>
 
-    <div class="tip">
-      <strong>First time?</strong> Android will ask you to allow installs from your browser. Tap <strong>Settings &rarr; Allow</strong> when prompted, then tap the downloaded file to install.
+    <div class="platform-panel active" id="panel-android">
+      <a class="download-btn" id="downloadBtn" href="https://github.com/jagsk/front-steps-gate-agent/releases/latest/download/blackhawk-gate.apk">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download APK
+      </a>
+
+      <div class="tip">
+        <strong>First time?</strong> Android will ask you to allow installs from your browser. Tap <strong>Settings &rarr; Allow</strong> when prompted, then tap the downloaded file to install.
+      </div>
+    </div>
+
+    <div class="platform-panel" id="panel-ios">
+      <p style="margin: 0 0 12px; color: #334155; font-size: 14px;">iOS access is by invite via <strong>TestFlight</strong>. Send a quick request and you'll get an invite link back.</p>
+
+      <a class="download-btn" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);" href="https://github.com/jagsk/front-steps-gate-agent/issues/new?title=TestFlight+Access+Request&labels=testflight&body=Hi%21+Please+add+me+to+the+Blackhawk+Gate+TestFlight+beta.%0A%0AApple+ID+email%3A+%3Cyour+email%3E%0ACommunity%2Fneighborhood%3A+%3Coptional%3E" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Request TestFlight Access
+      </a>
+
+      <div class="tip" style="background: #f0f9ff; border-color: #bae6fd; color: #0c4a6e;">
+        <strong>What happens next?</strong> Your request opens a GitHub issue (sign-in required). We'll reply with a TestFlight invite link. Install <strong>TestFlight</strong> from the App Store first, then tap the invite link to install Blackhawk Gate.
+      </div>
     </div>
   </div>
 
@@ -328,7 +389,7 @@
       <div class="step-number">2</div>
       <div class="step-content">
         <h3>Tap the gear icon</h3>
-        <p>Top-right corner of the screen to open Settings.</p>
+        <p>Top-right corner of the screen to open Settings. Same location on Android and iOS.</p>
       </div>
     </div>
 
@@ -388,6 +449,22 @@
   </div>
 
 </div>
+
+<script>
+  (function() {
+    var tabs = document.querySelectorAll('.platform-tabs button');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var targetId = tab.getAttribute('data-panel');
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelectorAll('.platform-panel').forEach(function(p) {
+          p.classList.toggle('active', p.id === targetId);
+        });
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
